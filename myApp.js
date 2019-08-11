@@ -112,6 +112,17 @@ app.get('/api/timestamp/:date_string?', function(req, res) {
   return res.json({"error": "Invalid Date"})
 })
 
+
+app.get('/api/whoami', function(req,res) {
+  console.log(req.headers)
+  var ip = req.headers['x-forwarded-for'].split(',')[0]
+  res.json({
+    "ipaddress": ip,
+    "language": req.headers['accept-language'],
+    "software": req.headers['user-agent'],
+    
+  });
+})
 //---------- DO NOT EDIT BELOW THIS LINE --------------------
 
  module.exports = app;
