@@ -105,8 +105,11 @@ app.get('/api/timestamp/:date_string?', function(req, res) {
     date = new Date()
   }
   date = new Date(dateString);
-  return {"unix": date.getTime(), "utc" : date.toUTCString() }
-  // res.json({"error": "Invalid Date"})
+  if (date) {
+    return {"unix": date.getTime(), "utc" : date.toUTCString() }  
+  }
+  
+  return res.json({"error": "Invalid Date"})
 })
 
 //---------- DO NOT EDIT BELOW THIS LINE --------------------
